@@ -1,0 +1,30 @@
+version: '3'
+
+services:
+  mysql-development:
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: testing
+      MYSQL_DATABASE: CUSTOMERS
+    ports:
+      - 3310:3306
+    networks:
+      - common-network
+  sidc-container:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    volumes:
+      - /data/sidc-container
+    ports:
+      - 8080:8080
+    depends_on:
+      - mysql-development
+    links:
+      - mysql-development
+    networks:
+      - common-network
+
+networks:
+  common-network:
+    driver: bridge
