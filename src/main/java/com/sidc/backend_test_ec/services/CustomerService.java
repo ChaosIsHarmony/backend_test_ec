@@ -144,18 +144,16 @@ public class CustomerService {
             // Parse stream by HTTP status
             int status = con.getResponseCode();
             BufferedReader streamReader = null;
-            if (status > 299) {
+            if (status > 299)
                 streamReader = new BufferedReader(new InputStreamReader(con.getErrorStream()));
-            } else {
+            else
                 streamReader = new BufferedReader(new InputStreamReader(con.getInputStream()));
-            }
+
 
             // Read connection contents
             String inputLine;
             StringBuffer content = new StringBuffer();
-            while ((inputLine = streamReader.readLine()) != null) {
-                content.append(inputLine);
-            }
+            while ((inputLine = streamReader.readLine()) != null) content.append(inputLine);
 
             // Clean up
             streamReader.close();
@@ -173,7 +171,8 @@ public class CustomerService {
         // NOTE: could use a JSON library to make this more robust
         String[] tokens = content.toString().split(",");
         for (String token : tokens)
-            if (token.startsWith("\"url\"")) return token.substring(7,token.length()-1);
+            if (token.startsWith("\"url\""))
+                return token.substring(7,token.length()-1);
 
         return null;
     }
