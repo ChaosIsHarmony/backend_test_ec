@@ -18,6 +18,7 @@ public class Customer implements IEntity, Serializable {
   private String firstName;
   private String lastName;
   private String email;
+  private String petImgUrl;
 
   public Long getId() {
     return id;
@@ -32,6 +33,9 @@ public class Customer implements IEntity, Serializable {
   public void setLastName(String lastName) { this.lastName = lastName; }
   public String getEmail() { return this.email; }
   public void setEmail(String email) { this.email = email; }
+  public boolean hasPet() { return this.petImgUrl != null; }
+  public String getPetImgUrl() { return petImgUrl; }
+  public void setPetImgUrl(String petImgUrl) { this.petImgUrl = petImgUrl; }
 
   @Override
   public String toString() {
@@ -63,6 +67,7 @@ public class Customer implements IEntity, Serializable {
     c.firstName = this.firstName;
     c.lastName = this.lastName;
     c.email = this.email;
+    c.petImgUrl = (this.petImgUrl != null) ? this.petImgUrl : "";
 
     return c;
   }
@@ -73,6 +78,7 @@ public class Customer implements IEntity, Serializable {
     public String firstName;
     public String lastName;
     public String email;
+    public String petImgUrl;
 
     @Override
     public Long getId() {

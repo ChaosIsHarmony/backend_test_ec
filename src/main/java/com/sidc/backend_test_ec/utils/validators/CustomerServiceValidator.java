@@ -56,4 +56,22 @@ public class CustomerServiceValidator extends BaseServiceValidator {
 
         return this;
     }
+
+    public CustomerServiceValidator validateCustomerHasNoPets() {
+        // short circuit if there is already an error
+        if (this.hasError) return this;
+
+        if (((Customer) this.getPayload("Customer")).hasPet()) {
+            this.setError(
+                    ErrorHandler.handleConflictErrors(
+                            this.classAndMethod,
+                            "You already have a pet!",
+                            "Pet"
+                    )
+            );
+            return this;
+        }
+
+        return this;
+    }
 }

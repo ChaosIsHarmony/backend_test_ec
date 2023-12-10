@@ -11,7 +11,7 @@ TO RUN:
 
 TO TEST REST SERVICES:
 
-    CREATE NEW CUSTOMER:
+    CREATE NEW CUSTOMER
 
         $ curl http://localhost:8080/customer/add -H "Content-Type: application/json" -d '{"firstName":"Bobo", "lastName":"McGee", "email":"bobo.m@b.com", "id":1}'
 
@@ -31,3 +31,7 @@ TO TEST REST SERVICES:
 
 
 TO TEST API INTEGRATION:
+
+    FETCH A PET FOR CUSTOMER
+
+        $ curl http://localhost:8080/customer/get_pet_for_customer/1

@@ -18,3 +18,7 @@ spring:
 
 server:
   port: 8080
+
+dog-api:
+  api-endpoint: https://api.thedogapi.com/v1/images/search?api_key=
+  api-key: live_SbcmZRnCQllaFeRJuSEwSUnmcKXz4kFxUFDL88ABxHkHfy37MpLpJbZfFvlj00QN

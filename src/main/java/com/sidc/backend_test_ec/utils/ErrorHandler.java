@@ -27,8 +27,17 @@ public class ErrorHandler {
 
     }
 
+    public static ResponseEntity<?> handleExternalAPIError(String classAndMethod, String msg) {
+        logEvent("handleExternalAPIError: " + classAndMethod, msg);
+        return new ResponseEntity<>(msg, HttpStatus.SERVICE_UNAVAILABLE);
+    }
+
+    // -----------------------------------------
+    // -------------HELPER METHODS--------------
+    // -----------------------------------------
     private static void logEvent(String source, String msg) {
         System.err.println("ErrorHandler:" + source);
         System.err.println("Error: " + msg);
     }
+
 }

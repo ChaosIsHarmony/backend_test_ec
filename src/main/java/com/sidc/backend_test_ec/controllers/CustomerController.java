@@ -43,9 +43,15 @@ public class CustomerController {
     return customerService.editCustomer(customerDTO);
   }
 
-  @DeleteMapping(path ="/delete_customer/{customerId}")
+  @DeleteMapping(path="/delete_customer/{customerId}")
   public ResponseEntity<?> deleteCustomer(@PathVariable Long customerId) {
     // PROCESS REQUEST
     return customerService.deleteCustomer(customerId);
+  }
+
+  @GetMapping(path="/get_pet_for_customer/{customerId}")
+  public ResponseEntity<?> getPetForCustomer(@PathVariable Long customerId) {
+    // PROCESS REQUEST
+    return customerService.getPetForCustomer(customerId);
   }
 }
