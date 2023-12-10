@@ -141,6 +141,7 @@ public class CustomerService {
 
     private String processRequest(HttpURLConnection con) {
         try {
+            // Parse stream by HTTP status
             int status = con.getResponseCode();
             BufferedReader streamReader = null;
             if (status > 299) {
@@ -149,14 +150,18 @@ public class CustomerService {
                 streamReader = new BufferedReader(new InputStreamReader(con.getInputStream()));
             }
 
+            // Read connection contents
             String inputLine;
             StringBuffer content = new StringBuffer();
             while ((inputLine = streamReader.readLine()) != null) {
                 content.append(inputLine);
             }
+
+            // Clean up
             streamReader.close();
             con.disconnect();
 
+            // Parse contents and return the result
             return parseImgUrl(content);
         } catch (IOException e) {
             System.err.println("[ERROR] " + e);
@@ -165,6 +170,7 @@ public class CustomerService {
     }
 
     private String parseImgUrl(StringBuffer content) {
+        // NOTE: could use a JSON library to make this more robust
         String[] tokens = content.toString().split(",");
         for (String token : tokens)
             if (token.startsWith("\"url\"")) return token.substring(7,token.length()-1);
